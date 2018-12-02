@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyCokLQXaaiOMup9ASMcOb9ikdpyuvMbvJ4",
-    authDomain: "my-huifu-1543306021160.firebaseapp.com",
-    databaseURL: "https://my-huifu-1543306021160.firebaseio.com",
-    projectId: "my-huifu-1543306021160",
-    storageBucket: "my-huifu-1543306021160.appspot.com",
-    messagingSenderId: "1029883958097"
+    apiKey: "AXXXXXXXXXXXXXXXX",
+    authDomain: "my-huifu-YYYYYYYYYY.firebaseapp.com",
+    databaseURL: "https://my-huifu-YYYYYYYYYYYYYYYY.firebaseio.com",
+    projectId: "my-huifu-YYYYYYYYY",
+    storageBucket: "my-huifu-YYYYYYYYYY.appspot.com",
+    messagingSenderId: "YYYYYYYYYYY"
   }
 };
 
