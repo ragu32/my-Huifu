@@ -5,24 +5,27 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component'
+import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import {AngularFirestoreModule} from "@angular/fire/firestore";
-import { AuthServiceService } from './service/auth-service.service';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import { AuthService } from './service/auth-service';
 import { CommonModule } from '@angular/common';
 import { NgxLoadingModule } from 'ngx-loading';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { ContentComponent } from './content/content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    ContentComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,19 +36,20 @@ import { NgxLoadingModule } from 'ngx-loading';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
+    NgbModalModule.forRoot(),
     NgxLoadingModule.forRoot({}),
     RouterModule.forRoot([
       {
-        path:'login',
-        component:LoginComponent
+        path: 'login',
+        component: LoginComponent
       },
       {
-        path:'',
-        component:HomeComponent
+        path: '',
+        component: HomeComponent
       }
     ])
   ],
-  providers: [AuthServiceService],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

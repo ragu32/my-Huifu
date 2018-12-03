@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthServiceService } from '../service/auth-service.service';
+import { AuthService } from '../service/auth-service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,15 +10,28 @@ import { AuthServiceService } from '../service/auth-service.service';
 })
 export class HomeComponent implements OnInit {
 
-  currentUser: String = null
-  constructor(private Auth: AuthServiceService) { 
-    this.currentUser = localStorage.getItem('currentUser')
+  currentUser: String = null;
+  closeResult: string;
+  constructor(private Auth: AuthService, private modalService: NgbModal,
+     private router: Router) {
+    this.currentUser = localStorage.getItem('currentUser');
   }
 
   ngOnInit() {
   }
 
   logoutUser() {
-    this.Auth.userLogOut()
+    this.Auth.userLogOut().then((response) => {
+      this.router.navigateByUrl('/login');
+    }).catch((error) => {
+      console.log('error :' + error);
+    });
   }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    });
+  }
+
 }

@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
 import { FirebaseAuth } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Router } from '@angular/router';
 import { auth } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthServiceService {
+export class AuthService {
 
-  authState: FirebaseAuth = null
-  constructor(private http: HttpClient, private angularFireAuth: AngularFireAuth, 
-    private router: Router) { 
+  authState: FirebaseAuth = null;
+  constructor(private http: HttpClient, private angularFireAuth: AngularFireAuth) {
     }
 
     registerUser(userEmail, password) {
@@ -25,38 +23,39 @@ export class AuthServiceService {
 
       this.angularFireAuth.auth
       .createUserWithEmailAndPassword(userEmail, password)
-      .then((response) =>{
-        console.log("success :" + response)
+      .then((response) => {
+        console.log('success :' + response);
       }
-      ). catch((error) =>{
-        console.log(error)
-      })
+      ). catch((error) => {
+        console.log(error);
+      });
     }
   getUserAuthentication(userEmail, password) {
-     this.angularFireAuth.auth
+     return this.angularFireAuth.auth
     .signInWithEmailAndPassword(userEmail, password)
     .then((response => {
       // this.http.post('http://localhost:8080/api', {
       //   response
-      // }).subscribe(loginResponse => 
+      // }).subscribe(loginResponse =>
       //   console.log("logi success:" + JSON.stringify(loginResponse)))
-      //console.log("logi success:" + JSON.stringify(response))
-      localStorage.setItem('currentUser', response.user.email)
-      //this.loginComp.user(false)
-      this.router.navigateByUrl('/')
-    })).catch((error) =>{
-      console.log("error logging in :"+ error)
-    })
+      localStorage.setItem('currentUser', response.user.email);
+      console.log('logi success:' + JSON.stringify(response));
+      // this.loginComp.user(false)
+      return response;
+    })).catch((error) => {
+      console.log('error logging in :' + error);
+      return error;
+    });
   }
 
   userLogOut() {
-    this.angularFireAuth.auth.signOut().then(() =>{
-      localStorage.removeItem('currentUser')
-      this.router.navigateByUrl('/login')
+    return this.angularFireAuth.auth.signOut().then(() => {
+      localStorage.removeItem('currentUser');
+      //this.router.navigateByUrl('/login');
     }
     ).catch((error) => {
-      console.log('log out failed :' + error)
-    })
+      console.log('log out failed :' + error);
+    });
   }
 
 }

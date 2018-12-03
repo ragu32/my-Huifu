@@ -1,14 +1,26 @@
 <div *ngIf="currentUser">
   <div>
     <button (click)="logoutUser()">Logout</button>
-  </div>
+  </div><br>
   <div class="container content">
     <div class="row">
-      <div class="col-md-3">profile</div>
-      <div class="col-md-9">sections</div>
+      <div class="col-md-3"><app-profile></app-profile></div>
+      <div class="col-md-9"><app-content></app-content></div>
     </div>
   </div>
 </div>
 <div *ngIf="!currentUser">
   <a routerLink="/login">Login</a>
+  <!-- <button (click)="open(content)">LOGIN</button> -->
 </div>
+<!-- <ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-login></app-login>
+  </div>
+</ng-template> -->
