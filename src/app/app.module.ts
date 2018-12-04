@@ -7,17 +7,34 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
-import { AuthService } from './service/auth-service';
+import { UserAuthService } from './service/auth-service';
 import { CommonModule } from '@angular/common';
 import { NgxLoadingModule } from 'ngx-loading';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContentComponent } from './content/content.component';
+import {
+  AuthServiceConfig,
+  LinkedinLoginProvider,
+  SocialLoginModule,
+} from 'angular-6-social-login';
+
+export function getAuthServiceConfigs() {
+  const config = new AuthServiceConfig(
+      [
+          {
+            id: LinkedinLoginProvider.PROVIDER_ID,
+            provider: new LinkedinLoginProvider('814l50ipbz7lmb')
+          },
+      ]
+  );
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -36,7 +53,8 @@ import { ContentComponent } from './content/content.component';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
-    NgbModalModule.forRoot(),
+    SocialLoginModule,
+    NgbModule.forRoot(),
     NgxLoadingModule.forRoot({}),
     RouterModule.forRoot([
       {
@@ -49,7 +67,12 @@ import { ContentComponent } from './content/content.component';
       }
     ])
   ],
-  providers: [AuthService],
+  providers: [UserAuthService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

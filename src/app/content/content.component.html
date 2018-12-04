@@ -1,3 +1,11 @@
 <p>
   Huifu content
 </p>
+<div class="card">
+  <div class="card-body" (click)="isCollapse = !isCollapse" [attr.aria-expanded]="!isCollapse">
+    Heading
+  </div>
+  <div class="card-body" [ngbCollapse]="isCollapse">
+      You can collapse this card by clicking Heading
+  </div>
+</div>

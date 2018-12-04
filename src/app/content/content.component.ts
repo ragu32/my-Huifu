@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentComponent implements OnInit {
 
+  private str: String;
+  public isCollapse = false;
   constructor() { }
 
   ngOnInit() {

@@ -4,5 +4,6 @@
       <input type="password" placeholder="password" id="userPass"><br>
       <input type="submit" value="LOGIN">
     </form>
+    <button (click)="socialSignIn('linkedin')">Linked In Login</button>
     <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
 </div>

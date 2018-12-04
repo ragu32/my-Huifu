@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../service/auth-service';
+import { UserAuthService } from '../service/auth-service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 
@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   currentUser: String = null;
   closeResult: string;
-  constructor(private Auth: AuthService, private modalService: NgbModal,
+  constructor(private Auth: UserAuthService, private modalService: NgbModal,
      private router: Router) {
     this.currentUser = localStorage.getItem('currentUser');
   }

@@ -4,14 +4,16 @@ import { FirebaseAuth } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { auth } from 'firebase';
+import { User } from '../models/user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class UserAuthService {
 
   authState: FirebaseAuth = null;
-  constructor(private http: HttpClient, private angularFireAuth: AngularFireAuth) {
+  constructor(private http: HttpClient, private angularFireAuth: AngularFireAuth, private router: Router) {
     }
 
     registerUser(userEmail, password) {
@@ -41,17 +43,15 @@ export class AuthService {
       localStorage.setItem('currentUser', response.user.email);
       console.log('logi success:' + JSON.stringify(response));
       // this.loginComp.user(false)
+      // localStorage.setItem('userObj', this.user)
       return response;
-    })).catch((error) => {
-      console.log('error logging in :' + error);
-      return error;
-    });
+    }));
   }
 
   userLogOut() {
     return this.angularFireAuth.auth.signOut().then(() => {
       localStorage.removeItem('currentUser');
-      //this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/login');
     }
     ).catch((error) => {
       console.log('log out failed :' + error);
