@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAuthService } from '../service/auth-service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +12,14 @@ export class HomeComponent implements OnInit {
 
   currentUser: String = null;
   closeResult: string;
+  email: any;
+  displayName: String;
+
   constructor(private Auth: UserAuthService, private modalService: NgbModal,
-     private router: Router) {
+     private router: Router, private route: ActivatedRoute) {
     this.currentUser = localStorage.getItem('currentUser');
+    this.email = this.route.snapshot.queryParams['email'];
+    console.log(this.email);
   }
 
   ngOnInit() {
@@ -25,12 +30,6 @@ export class HomeComponent implements OnInit {
       this.router.navigateByUrl('/login');
     }).catch((error) => {
       console.log('error :' + error);
-    });
-  }
-
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
     });
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAuthService } from '../service/auth-service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import {
   AuthService,
   LinkedinLoginProvider
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.socialAuthService.signIn(socialPlatformProvider).then((userData) => {
         console.log(socialPlatform + ' sign in data : ' , userData);
         this.loading = false;
-        this.router.navigateByUrl('/');
+        this.router.navigate(['app-home']);
       }
     ).catch((error) => {
       this.loginError = error;
@@ -55,7 +55,13 @@ export class LoginComponent implements OnInit {
     const password = target.querySelector('#userPass').value;
     this.Auth.getUserAuthentication(email, password).then((response) => {
       this.loading = false;
-      this.router.navigateByUrl('/');
+      const navigationExtras: NavigationExtras = {
+        queryParams: {
+            'email': response.user.email,
+            'displayName': response.user.displayName
+        }
+    };
+      this.router.navigate(['/'], { queryParams: { email: JSON.stringify(response) }});
     }).catch((error) => {
         this.loading = false;
         this.loginError = error;
