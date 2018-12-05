@@ -1,4 +1,7 @@
+
 <div>
+  <div *ngIf="loginError" style="background-color:rgb(206, 139, 127); color: rgb(202, 9, 9)">invalid credentials
+  </div>
     <form (submit)="loginUser($event)">
       <input type="email" placeholder="email" id="userEmail"><br>
       <input type="password" placeholder="password" id="userPass"><br>

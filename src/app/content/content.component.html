@@ -1,11 +1,22 @@
 <p>
   Huifu content
 </p>
-<div class="card">
-  <div class="card-body" (click)="isCollapse = !isCollapse" [attr.aria-expanded]="!isCollapse">
-    Heading
-  </div>
-  <div class="card-body" [ngbCollapse]="isCollapse">
-      You can collapse this card by clicking Heading
+<div class="card" id="{{'card_'+currentUser}}">
+  <div *ngIf="showCard"> <button (click)="editSection()" *ngIf="currentUser" style="width: 100px; border-left-width: 50%;">Edit content</button>
+    <div>
+      <div class="card-body" style="color: darkslategray; font: bold" (click)="isCollapse = !isCollapse" [attr.aria-expanded]="!isCollapse">
+        {{headingStr}}
+      </div>
+      <div class="card-body" [ngbCollapse]="isCollapse">
+          {{contentStr}}
+      </div>
+    </div>
   </div>
 </div>
+<div class="container" *ngIf="editCard">
+    <form (submit)="addSection($event)">
+      <label>Heading</label><input type="text" class="form-control" id="heading" value={{headingStr}}><br>
+      <label>Content</label><textarea cols="100" class="form-control" id="content">{{contentStr}}</textarea><br>
+      <input type="submit" value="Add"><input type="button" (click)="cancelAdd()" value="Cancel">
+    </form>
+  </div>

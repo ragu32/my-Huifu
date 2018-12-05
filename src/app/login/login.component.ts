@@ -15,7 +15,7 @@ import { User } from '../models/user';
 export class LoginComponent implements OnInit {
 
   public loading = false;
-  public error: String = null;
+  public loginError: String = null;
 
   constructor(private Auth: UserAuthService, private router: Router,
     private socialAuthService: AuthService) {
@@ -41,13 +41,14 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/');
       }
     ).catch((error) => {
+      this.loginError = error;
       console.log('error :' + error);
     });
   }
 
   loginUser(event) {
     this.loading = true;
-    this.error = null;
+    this.loginError = null;
     event.preventDefault();
     const  target = event.target;
     const email = target.querySelector('#userEmail').value;
@@ -56,7 +57,8 @@ export class LoginComponent implements OnInit {
       this.loading = false;
       this.router.navigateByUrl('/');
     }).catch((error) => {
-        this.error = error;
+        this.loading = false;
+        this.loginError = error;
         console.log('error :' + error);
     });
   }
