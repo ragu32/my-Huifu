@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
             'displayName': response.user.displayName
         }
     };
-      this.router.navigate(['/'], { queryParams: { email: JSON.stringify(response) }});
+      this.router.navigate(['/']);
     }).catch((error) => {
         this.loading = false;
         this.loginError = error;

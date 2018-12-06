@@ -18,8 +18,6 @@ export class HomeComponent implements OnInit {
   constructor(private Auth: UserAuthService, private modalService: NgbModal,
      private router: Router, private route: ActivatedRoute) {
     this.currentUser = localStorage.getItem('currentUser');
-    this.email = this.route.snapshot.queryParams['email'];
-    console.log(this.email);
   }
 
   ngOnInit() {

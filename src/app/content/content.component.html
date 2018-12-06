@@ -1,14 +1,24 @@
 <p>
   Huifu content
 </p>
-<div class="card" id="{{'card_'+currentUser}}">
-  <div *ngIf="showCard"> <button (click)="editSection()" *ngIf="currentUser" style="width: 100px; border-left-width: 50%;">Edit content</button>
-    <div>
-      <div class="card-body" style="color: darkslategray; font: bold" (click)="isCollapse = !isCollapse" [attr.aria-expanded]="!isCollapse">
-        {{headingStr}}
-      </div>
-      <div class="card-body" [ngbCollapse]="isCollapse">
-          {{contentStr}}
+<div>
+  <div class="card" id="{{'card_'+currentUser}}">
+    <div *ngIf="showCard"> <button (click)="editSection()" *ngIf="currentUser" style="width: 100px; border-left-width: 50%;">Edit content</button>
+      <div *ngFor="let heading of headingArr">
+        <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-1">
+          <ngb-panel>
+            <ng-template ngbPanelTitle>
+              <div class="card-body" style="color: darkslategray; font: bold;" [attr.aria-expanded]="!isCollapse">
+                {{heading}}
+              </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <div class="card-body">
+                  {{contentStr}}
+              </div>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
       </div>
     </div>
   </div>

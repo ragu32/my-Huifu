@@ -11,6 +11,8 @@ export class ContentComponent implements OnInit {
   currentUser: String = null;
   headingStr: String = null;
   contentStr: String = null;
+  headingArr: Array<String> = [];
+  contentArr: Array<String> = [];
   showCard = true;
   editCard = false;
 
@@ -27,8 +29,10 @@ export class ContentComponent implements OnInit {
     const target = event.target;
     const heading = target.querySelector('#heading').value;
     const content = target.querySelector('#content').value;
-    this.headingStr = heading;
+    // this.headingStr = heading;
     this.contentStr = content;
+    this.headingArr.push(heading);
+    this.contentArr.push(content);
     this.editCard = false;
     this.showCard = true;
   }
@@ -41,5 +45,9 @@ export class ContentComponent implements OnInit {
   cancelAdd() {
     this.editCard = false;
     this.showCard = true;
+  }
+
+  collapseCard() {
+
   }
 }
