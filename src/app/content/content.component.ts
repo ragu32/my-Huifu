@@ -11,6 +11,8 @@ export class ContentComponent implements OnInit {
   currentUser: String = null;
   headingStr: String = null;
   contentStr: String = null;
+  headingEdit: String = null;
+  contentEdit: String = null;
   headingArr: Array<String> = [];
   contentArr: Array<String> = [];
   showCard = true;
@@ -24,7 +26,7 @@ export class ContentComponent implements OnInit {
   ngOnInit() {
   }
 
-  addSection(event) {
+  createSection(event) {
     event.preventDefault();
     const target = event.target;
     const heading = target.querySelector('#heading').value;
@@ -37,17 +39,23 @@ export class ContentComponent implements OnInit {
     this.showCard = true;
   }
 
-  editSection() {
+  editSection(heading, content) {
     this.editCard = true;
     this.showCard = false;
+    this.headingStr = heading;
+    this.contentStr = content;
   }
 
   cancelAdd() {
     this.editCard = false;
     this.showCard = true;
+    // this.modalService.
   }
 
-  collapseCard() {
-
+  addSection() {
+    this.editCard = true;
+    this.showCard = false;
+    this.headingStr = null;
+    this.contentStr = null;
   }
 }

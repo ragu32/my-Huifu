@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
   }
 
   public socialSignIn(socialPlatform: string) {
-    this.loading = true;
     let socialPlatformProvider;
     if (socialPlatform === 'linkedin') {
         socialPlatformProvider = LinkedinLoginProvider.PROVIDER_ID;
